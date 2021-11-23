@@ -89,7 +89,7 @@ class LogInScreen(Screen):
                         us.setAddres(password[5])
                         us.setPlaca(password[6])
                         us.setCarcap(password[7])
-                        us.setPoints(password[9])
+                        us.setPoints(password[13])
                         cuentaExistente=True
                         na=self.manager.get_screen("perfil")
                         na.ids.nameP.text=us.getName()
