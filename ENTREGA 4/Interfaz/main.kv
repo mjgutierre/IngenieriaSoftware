@@ -1,0 +1,817 @@
+
+<EditPerfil>:
+    name:"pop"
+    Label:
+        multiline:True
+        text:"Si deseas editar tu perfil por favor\npresiona el boton,\nsino, toca en cualquier parte"
+        size_hint_x:None
+        size_hint_y:None
+        font_size: 20
+        width:300
+        height:400
+        pos_hint:{"center_x":0.5,"center_y":0.7}
+    Button:
+        text: "SI"
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:50
+        pos_hint:{"center_x":0.5,"center_y":0.2}
+        on_press:
+            root.moveTo()
+
+<ErrorLogin>:
+    name:"errorlogin"
+    Label:
+        multiline:True
+        text:"por favor llene los campos o\nescriba correctamente la\ncuenta"
+        size_hint_x:None
+        size_hint_y:None
+        font_size: 25
+        width:300
+        height:400
+        pos_hint:{"center_x":0.5,"center_y":0.7}
+
+
+WindowManager:
+    Default:
+    LogInScreen:
+    MenuScreen:
+
+
+
+    ProfileScreen:
+    EditProfileScreen:
+
+
+
+    RiderWNRScreen:
+    RiderWaitScreen:
+    RiderPScreen:
+    RiderEndRScreen:
+
+
+
+    DriverLocationScreen:
+    DriverSelectionScreen:
+    DriverSeeRiderProfileScreen:
+    DriverContactRiderScreen:
+    DriverMoreTripsScreen:
+    DriverEndScreen:
+
+
+
+<Default>:
+    name:"default"
+    Button:
+        text: "INICIAR SESION"
+        size_hint_x:None
+        size_hint_y:None
+        width:300
+        height:80
+        pos_hint:{"center_x":0.5,"center_y":0.2}
+        on_press:root.manager.current="logIn"
+    Image:
+        size_hint_x:None
+        size_hint_y:None
+        size:"400","500"
+        source:"Fotos/PRICAR.jpg"
+        pos_hint:{"center_x":0.5,"center_y":0.55}
+<LogInScreen>:
+    name:"logIn"
+    user:user
+    password:password
+    Label:
+        id:bienvenida_label
+        text: "INICIAR\nSESION"
+        font_size:80
+        pos_hint:{"center_x":0.5,"center_y":0.8}
+    Label:
+        text:"Bienvenido a Pricar"
+        font_size:20
+        pos_hint:{"center_x":0.5,"center_y":0.63}
+    TextInput:
+        id:user
+        multiline: False
+        hint_text:"Correo"
+        icon_right:"account"
+        helper_text: "olvidaste el usuario?"
+        helper_text_mode: "on_focus"
+        pos_hint:{"center_x":0.5,"center_y":0.5}
+        font_size:25
+        size_hint_x:None
+        size_hint_y:None
+        width:250
+        height:50
+    TextInput:
+        id:password
+        multiline: False
+        hint_text:"Contraseña"
+        helper_text: "olvidaste la contraseña?"
+        icon_right:"eye-off"
+        helper_text_mode: "on_focus"
+        pos_hint:{"center_x":0.5,"center_y":0.4}
+        font_size:25
+        size_hint_x:None
+        size_hint_y:None
+        width:250
+        height:50
+    Button:
+        text: "Salir"
+        on_press:root.manager.current="default"
+        font_size:20
+        pos_hint:{"center_x":0.5,"center_y":0.2}
+        size_hint_x:None
+        size_hint_y:None
+        width:300
+        height:50
+    Button:
+        id:ingresar
+        text: "ingresar"
+        pos_hint:{"center_x":0.5,"center_y":0.3}
+        on_press:
+            root.login()
+
+        size_hint_x:None
+        size_hint_y:None
+        width:300
+        height:50
+        font_size:20
+<MenuScreen>:
+    name: "menu"
+    Image:
+        size_hint_x:None
+        size_hint_y:None
+        size:"400","500"
+        source:"Fotos/PRICAR.jpg"
+        pos_hint:{"center_x":0.5,"center_y":0.55}
+        orientation:"horizontal"
+        spacing:10
+        padding:15
+    Button:
+        text: "Ver perfil"
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+        pos_hint:{"center_x":0.2,"center_y":0.1}
+        on_release:
+            root.updateData()
+            root.manager.current="perfil"
+    Button:
+        text: "Conductor"
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:120
+        height:80
+        pos_hint:{"center_x":0.5,"center_y":0.1}
+        on_press:root.checkStatusC()
+    Button:
+        text: "Pasajero"
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+        pos_hint:{"center_x":0.8,"center_y":0.1}
+        on_press: root.checkStatusP()
+
+
+
+
+<ProfileScreen>:
+    name:"perfil"
+    Image:
+        size_hint_x:None
+        size_hint_y:None
+        size:"250","250"
+        source:"Fotos/messi.jpg"
+        pos_hint:{"center_x":0.5,"center_y":0.7}
+        elevation:10
+    Button:
+        text: "volver"
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+        pos_hint:{"center_x":0.2,"center_y":0.9}
+        on_press:root.manager.current="menu"
+    Label:
+        text: "Mi Perfil: "
+        font_size: 50
+        pos_hint:{"center_x":0.6,"center_y":0.9}
+    Label:
+        text: "Nombre : "
+        font_size: 25
+        pos_hint:{"center_x":0.2,"center_y":0.5}
+    Label:
+        id:nameP
+        font_size: 25
+        pos_hint:{"center_x":0.6,"center_y":0.5}
+    Label:
+        text: "Correo : "
+        font_size: 25
+        pos_hint:{"center_x":0.13,"center_y":0.45}
+    Label:
+        id:mail
+        font_size: 25
+        pos_hint:{"center_x":0.6,"center_y":0.45}
+    Label:
+        text: "Direccion : "
+        font_size: 25
+        pos_hint:{"center_x":0.2,"center_y":0.4}
+    Label:
+        id:address
+        font_size: 25
+        pos_hint:{"center_x":0.6,"center_y":0.4}
+    Label:
+        text: "Celular : "
+        font_size: 25
+        pos_hint:{"center_x":0.2,"center_y":0.35}
+    Label:
+        id:cellphone
+        font_size: 25
+        pos_hint:{"center_x":0.6,"center_y":0.35}
+    Label:
+        text: "Placa : "
+        font_size: 25
+        pos_hint:{"center_x":0.2,"center_y":0.3}
+    Label:
+        id:placa
+        font_size: 25
+        pos_hint:{"center_x":0.6,"center_y":0.3}
+    Label:
+        text: "Cap. Vehiculo : "
+        font_size: 25
+        pos_hint:{"center_x":0.25,"center_y":0.25}
+    Label:
+        id:carcap
+        font_size: 25
+        pos_hint:{"center_x":0.6,"center_y":0.25}
+    Label:
+        text: "Puntos : "
+        font_size: 25
+        pos_hint:{"center_x":0.2,"center_y":0.2}
+    Label:
+        id:point
+        font_size: 25
+        pos_hint:{"center_x":0.6,"center_y":0.2}
+    Button:
+        text: "Cerrar Sesion"
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:130
+        height:80
+        pos_hint:{"center_x":0.25,"center_y":0.1}
+        on_press:root.manager.current="logIn"
+    Button:
+        text: "Editar Perfil"
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+        pos_hint:{"center_x":0.8,"center_y":0.1}
+        on_press:app.show_popup("Editar Perfil")
+<EditProfileScreen>:
+    name:"editP"
+    nameP:nameP
+    email:email
+    direc:direc
+    cel:cel
+    placa:placa
+    capve:capve
+    Label:
+        text:"Por favor llena los campos con\nlos datos nuevos, si no quieres \nmodificar alguno déjalo vacio"
+        font_size: 25
+        size_hint_x:None
+        size_hint_y:None
+        pos_hint:{"center_x":0.5,"center_y":0.9}
+    BoxLayout:
+        size_hint:None,None
+        size:400,600
+        pos_hint:{"center_x":0.5,"center_y":0.5}
+        elevation:10
+        padding:20
+        spacing:25
+        orientation:"vertical"
+        TextInput:
+            id:nameP
+            multiline: False
+            hint_text:"Nombre"
+            helper_text_mode: "on_focus"
+            pos_hint:{"center_x":0.5,"center_y":0.1}
+            font_size:25
+            size_hint_x:None
+            size_hint_y:None
+            width:250
+            height:50
+        TextInput:
+            id:email
+            multiline: False
+            hint_text:"Correo Electronico"
+            helper_text_mode: "on_focus"
+            pos_hint:{"center_x":0.5,"center_y":0.3}
+            font_size:25
+            size_hint_x:None
+            size_hint_y:None
+            width:250
+            height:50
+        TextInput:
+            id:cel
+            multiline: False
+            hint_text:"Celular"
+            helper_text_mode: "on_focus"
+            pos_hint:{"center_x":0.5,"center_y":0.5}
+            font_size:25
+            size_hint_x:None
+            size_hint_y:None
+            width:250
+            height:50
+        TextInput:
+            id:placa
+            multiline: False
+            hint_text:"Placa"
+            helper_text_mode: "on_focus"
+            pos_hint:{"center_x":0.5,"center_y":0.7}
+            font_size:25
+            size_hint_x:None
+            size_hint_y:None
+            width:250
+            height:50
+        TextInput:
+            id:direc
+            multiline: False
+            hint_text:"direccion"
+            helper_text_mode: "on_focus"
+            pos_hint:{"center_x":0.5,"center_y":0.9}
+            font_size:25
+            size_hint_x:None
+            size_hint_y:None
+            width:250
+            height:50
+        TextInput:
+            id:capve
+            multiline: False
+            hint_text:"Capacidad Vehiculo"
+            helper_text_mode: "on_focus"
+            pos_hint:{"center_x":0.5,"center_y":1.1}
+            font_size:25
+            size_hint_x:None
+            size_hint_y:None
+            width:250
+            height:50
+    Button:
+        id:cancel
+        text: "Cancelar"
+        pos_hint:{"center_x":0.2,"center_y":0.1}
+        on_press:root.manager.current="perfil"
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+    Button:
+        id:save
+        text: "Guardar"
+        pos_hint:{"center_x":0.8,"center_y":0.1}
+        on_press:
+            root.save()
+            root.manager.current="menu"
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+
+
+
+<RiderWNRScreen>:
+    name:"ridernoride"
+    Label:
+        text:"Selecciona el boton con\nla opcion de busqueda\nque prefieras"
+        multiline:True
+        pos_hint:{"center_x":0.5,"center_y":0.75}
+        font_size:25
+        width:300
+        height:400
+
+    Button:
+        text:"Ubicacion Predeterminada"
+        on_press:
+            root.paradaP()
+            root.manager.current="waitingfordriver"
+        font_size:20
+        pos_hint:{"center_x":0.5,"center_y":0.2}
+        size_hint_x:None
+        size_hint_y:None
+        width:300
+        height:50
+    Button:
+        text:"Ubicacion actual"
+        on_press:
+            root.paradaA()
+            root.manager.current="waitingfordriver"
+        font_size:20
+        pos_hint:{"center_x":0.5,"center_y":0.1}
+        size_hint_x:None
+        size_hint_y:None
+        width:300
+        height:50
+    Button:
+        text: "volver"
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+        pos_hint:{"center_x":0.2,"center_y":0.9}
+        on_press:root.manager.current="menu"
+<RiderWaitScreen>:
+    name:"waitingfordriver"
+    Label:
+        text:"Estamos buscando un conductor para ti"
+        pos_hint:{"center_x":0.5,"center_y":0.7}
+        font_size:20
+    Button:
+        text:"Cancelar busqueda"
+        on_press:
+            root.cancelRide()
+            root.manager.current="ridernoride"
+        font_size:20
+        pos_hint:{"center_x":0.5,"center_y":0.2}
+        size_hint_x:None
+        size_hint_y:None
+        width:300
+        height:50
+
+<RiderPScreen>:
+    name:"riderpicked"
+    comments:comments
+    Label:
+        text:"Contacta al conductor"
+        pos_hint:{"center_x":0.5,"center_y":0.8}
+        font_size:35
+    Button:
+        text:"Llamar"
+        pos_hint:{"center_x":0.5,"center_y":0.7}
+        font_size:25
+        size_hint_x:None
+        size_hint_y:None
+        width:250
+        height:50
+    Button:
+        text:"Escribir"
+        pos_hint:{"center_x":0.5,"center_y":0.6}
+        font_size:25
+        size_hint_x:None
+        size_hint_y:None
+        width:250
+        height:50
+    Button:
+        text:"correo"
+        pos_hint:{"center_x":0.5,"center_y":0.5}
+        font_size:25
+        size_hint_x:None
+        size_hint_y:None
+        width:250
+        height:50
+        on_press:
+            root.sendComment()
+    TextInput:
+        id:comments
+        hint_text:"Comentarios"
+        pos_hint:{"center_x":0.5,"center_y":0.4}
+        font_size:25
+        size_hint_x:None
+        size_hint_y:None
+        width:250
+        height:100
+    Button:
+        text: "Cancelar viaje"
+        font_size:20
+        pos_hint:{"center_x":0.5,"center_y":0.3}
+        size_hint_x:None
+        size_hint_y:None
+        width:300
+        height:50
+        on_press:
+            root.cancelRide()
+            root.manager.current="ridernoride"
+<RiderEndRScreen>:
+    name:"endtriprider"
+    nameD:nameD
+    Label:
+        text: "CALIFICA\n      TU\n   VIAJE"
+        font_size:75
+        pos_hint:{"center_x":0.5,"center_y":0.8}
+    Label:
+        id:nameD
+        font_size:75
+        pos_hint:{"center_x":0.5,"center_y":0.8}
+    Button:
+        text: '1'
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+        pos_hint:{"center_x":0.5,"center_y":0.6}
+        on_press:
+            root.endTrip(1)
+            root.manager.current="menu"
+    Button:
+        text: '2'
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+        pos_hint:{"center_x":0.5,"center_y":0.5}
+        on_press:
+            root.endTrip(2)
+            root.manager.current="menu"
+    Button:
+        text: '3'
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+        pos_hint:{"center_x":0.5,"center_y":0.4}
+        on_press:
+            root.endTrip(3)
+            root.manager.current="menu"
+    Button:
+        text: '4'
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+        pos_hint:{"center_x":0.5,"center_y":0.3}
+        on_press:
+            root.endTrip(4)
+            root.manager.current="menu"
+    Button:
+        text: '5'
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+        pos_hint:{"center_x":0.5,"center_y":0.2}
+        on_press:
+            root.endTrip(5)
+            root.manager.current="menu"
+
+
+
+
+<DriverLocationScreen>:
+    name:"riderlocation"
+    Label:
+        text:"Selecciona el boton con\nla opcion de busqueda\nque prefieras"
+        multiline:True
+        pos_hint:{"center_x":0.5,"center_y":0.75}
+        font_size:25
+        width:300
+        height:400
+    Button:
+        id:maps
+        text:"ver la ruta sin pasajeros "
+        pos_hint:{"center_x":0.5,"center_y":0.4}
+        font_size:25
+        size_hint_x:None
+        size_hint_y:None
+        width:250
+        height:150
+        on_press:root.abrirRuta()
+    Button:
+        text:"Ubicacion Predeterminada"
+        on_press:
+            root.paradaP()
+            root.manager.current="driverselection"
+        font_size:20
+        pos_hint:{"center_x":0.5,"center_y":0.2}
+        size_hint_x:None
+        size_hint_y:None
+        width:300
+        height:50
+    Button:
+        text:"Ubicacion actual"
+        on_press:
+            root.paradaA()
+            root.manager.current="driverselection"
+        font_size:20
+        pos_hint:{"center_x":0.5,"center_y":0.1}
+        size_hint_x:None
+        size_hint_y:None
+        width:300
+        height:50
+    Button:
+        text: "volver"
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+        pos_hint:{"center_x":0.2,"center_y":0.9}
+        on_press:root.manager.current="menu"
+<DriverSelectionScreen>:
+    name:"driverselection"
+    Label:
+        text:"Selecciona al pasajero\nque desees recoger"
+        multiline:True
+        pos_hint:{"center_x":0.5,"center_y":0.75}
+        font_size:25
+        width:300
+        height:400
+    BoxLayout:
+        id:opciones
+        orientation:"vertical"
+        size_hint: None, None
+        size: 350,500
+        pos_hint:{"center_x":0.5,"center_y":0.4}
+        cols:2
+    Button:
+        text: "volver"
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+        pos_hint:{"center_x":0.2,"center_y":0.9}
+        on_press:
+            root.cancelSearch()
+            root.manager.current="riderlocation"
+    Button:
+        text: "actualizar"
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+        pos_hint:{"center_x":0.8,"center_y":0.9}
+        on_press:
+            root.quitarPasajero()
+            root.agregarPasajero()
+
+
+<DriverSeeRiderProfileScreen>:
+    name:"driverriderprofilescreen"
+    nameP:nameP
+    direc:direc
+    tDis:tDis
+    Button:
+        text: "volver"
+        font_size: 20
+        size_hint_x:None
+        size_hint_y:None
+        width:115
+        height:80
+        pos_hint:{"center_x":0.2,"center_y":0.9}
+        on_press:
+            root.manager.current="driverselection"
+    Label:
+        text: "Datos del\npasajero: "
+        font_size: 30
+        pos_hint:{"center_x":0.5,"center_y":0.7}
+    Label:
+        text: "Nombre: "
+        font_size: 20
+        pos_hint:{"center_x":0.2,"center_y":0.5}
+    Label:
+        id:nameP
+        font_size: 20
+        pos_hint:{"center_x":0.5,"center_y":0.5}
+    Label:
+        text: "Direccion : "
+        font_size: 20
+        pos_hint:{"center_x":0.2,"center_y":0.4}
+    Label:
+        id:direc
+        font_size: 20
+        pos_hint:{"center_x":0.5,"center_y":0.4}
+    Label:
+        text: "Tiempo en llegar : "
+        font_size: 20
+        pos_hint:{"center_x":0.2,"center_y":0.3}
+    Label:
+        id:tDis
+        font_size: 20
+        pos_hint:{"center_x":0.5,"center_y":0.3}
+    Button:
+        text: "Recoger"
+        font_size:20
+        size_hint_x:None
+        size_hint_y:None
+        width:300
+        height:50
+        pos_hint:{"center_x":0.5,"center_y":0.1}
+        on_press:
+            root.accept()
+            root.manager.current="drivercontact"
+
+<DriverContactRiderScreen>:
+    name:"drivercontact"
+    Label:
+        text:"Contacta al Pasajero"
+        pos_hint:{"center_x":0.5,"center_y":0.8}
+        font_size:35
+    Button:
+        text:"Llamar"
+        pos_hint:{"center_x":0.5,"center_y":0.7}
+        font_size:25
+        size_hint_x:None
+        size_hint_y:None
+        width:250
+        height:50
+    Button:
+        text:"Escribir"
+        pos_hint:{"center_x":0.5,"center_y":0.6}
+        font_size:25
+        size_hint_x:None
+        size_hint_y:None
+        width:250
+        height:50
+    Button:
+        text:"correo"
+        pos_hint:{"center_x":0.5,"center_y":0.5}
+        font_size:25
+        size_hint_x:None
+        size_hint_y:None
+        width:250
+        height:50
+    Button:
+        text: "Cancelar viaje"
+        font_size:20
+        pos_hint:{"center_x":0.5,"center_y":0.2}
+        size_hint_x:None
+        size_hint_y:None
+        width:300
+        height:50
+        on_press:
+            root.cancelRide()
+            root.manager.current="ridernoride"
+    Button:
+        text: "Pasajero Recogido"
+        font_size:20
+        pos_hint:{"center_x":0.5,"center_y":0.3}
+        size_hint_x:None
+        size_hint_y:None
+        width:300
+        height:50
+        on_press:
+            root.picked()
+            root.manager.current="drivermoret"
+<DriverMoreTripsScreen>:
+    name:"drivermoret"
+    Label:
+        text:"¿Quieres recoger a\nmas personas?"
+        pos_hint:{"center_x":0.5,"center_y":0.7}
+        font_size:35
+    Button:
+        text:"si"
+        pos_hint:{"center_x":0.5,"center_y":0.6}
+        font_size:25
+        size_hint_x:None
+        size_hint_y:None
+        width:250
+        height:50
+        on_press:
+            root.more()
+            root.manager.current="driverselection"
+    Button:
+        text:"no"
+        pos_hint:{"center_x":0.5,"center_y":0.5}
+        font_size:25
+        size_hint_x:None
+        size_hint_y:None
+        width:250
+        height:50
+        on_press:
+            root.noMore()
+            root.manager.current="driverend"
+<DriverEndScreen>:
+    name:"driverend"
+    Label:
+        text:"Presiona el boton para\nacabar el viaje"
+        pos_hint:{"center_x":0.5,"center_y":0.8}
+        font_size:35
+    Button:
+        text:"Acabar viaje"
+        pos_hint:{"center_x":0.5,"center_y":0.7}
+        font_size:25
+        size_hint_x:None
+        size_hint_y:None
+        width:250
+        height:50
+        on_press:
+            root.finish()
+            root.manager.current="menu"
